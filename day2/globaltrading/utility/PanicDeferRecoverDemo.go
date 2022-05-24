@@ -31,6 +31,6 @@ func ValidateAccount(accountNo int32, password string) {
 
 func main() {
 	defer fmt.Println("Running at the end from main")
-	ValidateAccount(-23, "")
+	ValidateAccount(45454, "")
 
 }

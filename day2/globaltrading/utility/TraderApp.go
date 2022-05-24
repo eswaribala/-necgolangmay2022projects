@@ -35,8 +35,8 @@ func viewCustomers() {
 }
 func main() {
 
-	createCustomer()
-	viewCustomers()
+	//createCustomer()
+	//viewCustomers()
 
 	var customerObj models.Customer
 	//type checking
@@ -44,5 +44,16 @@ func main() {
 		fmt.Println(reflect.TypeOf(customerObj).Name())
 	}
 
-	fmt.Printf("Type%T", customerObj)
+	fmt.Printf("Type%T\n", customerObj)
+
+	customerObj = models.Customer{
+		328487, "Parameswari", "India",
+		models.Address{}, models.Bank{},
+	}
+	fmt.Printf("%v\n", customerObj)
+	//update the country name
+	updatedCustomerObj := customerObj.ChangeCountryName("USA")
+	fmt.Printf("%v\n", updatedCustomerObj)
+	fmt.Printf("%v\n", customerObj)
+
 }

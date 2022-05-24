@@ -20,3 +20,19 @@ type Customer struct {
 	AddressData Address
 	BankDetail  Bank
 }
+
+//call by value
+//updating the object
+//receiveobject method name method param return type
+func (c Customer) ChangeCountryName(countryName string) Customer {
+	//modify
+	c.Country = countryName
+	return c
+}
+
+//call by reference
+func (c *Customer) ChangeName(Name string) *Customer {
+	//modify
+	c.Name = Name
+	return c
+}

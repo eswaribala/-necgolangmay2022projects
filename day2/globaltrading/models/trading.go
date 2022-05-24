@@ -1,6 +1,8 @@
 package models
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type ICustomer interface {
 	View() //abstract method
@@ -8,5 +10,5 @@ type ICustomer interface {
 
 //implementation
 func (c *Customer) View() {
-	fmt.Printf("%v\n", c)
+	fmt.Printf("%v\n", *c)
 }

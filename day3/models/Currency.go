@@ -1,5 +1,7 @@
 package models
 
+import "necws/day3/dao"
+
 type Currency struct {
 	CurrencyCode   string
 	CurrencyValue  int32
@@ -20,8 +22,12 @@ type ICurrency interface {
 	Delete()
 }
 
-func (Curr *Currency) Create() {
-
+func (Curr *Currency) Create() (int64, error) {
+	result, err := dao.CreateCurrency(Curr)
+	if err != nil {
+		return 0, err
+	}
+	return result, nil
 }
 func (Curr *Currency) Edit(value int32) *Currency {
 	Curr.CurrencyValue = value

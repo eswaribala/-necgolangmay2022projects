@@ -2,14 +2,18 @@ package main
 
 import (
 	"fmt"
-	"necws/day3/dao"
+	"necws/day3/models"
 )
 
 func main() {
-	dbConn := dao.DBHelper()
 
-	if dbConn != nil {
-		fmt.Println("Mysql Conn ready")
+	Curr := models.Currency{"INR",
+		75, "Rupay"}
+	result, error := Curr.Create()
+	if error != nil {
+		fmt.Println(error)
+	} else {
+		fmt.Printf("Records inserted %d", result)
 	}
 
 }

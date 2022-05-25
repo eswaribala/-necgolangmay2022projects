@@ -2,16 +2,14 @@ package main
 
 import (
 	"fmt"
-	"necws/day3/models"
+	"necws/day3/dao"
 )
 
 func main() {
-	transaction := models.Transaction{28487,
-		25486583,
-		models.Currency{"INR", 78,
-			"Rupay"},
-	}
-	transaction.Edit(80)
+	dbConn := dao.DBHelper()
 
-	fmt.Printf("%v", transaction)
+	if dbConn != nil {
+		fmt.Println("Mysql Conn ready")
+	}
+
 }

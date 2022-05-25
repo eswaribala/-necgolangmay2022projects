@@ -42,5 +42,5 @@ func (Curr *Currency) Delete() {
 }
 
 func (Curr *Currency) View() {
-
+	dao.ViewCurrencies()
 }

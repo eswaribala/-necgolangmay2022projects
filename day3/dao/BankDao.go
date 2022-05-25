@@ -4,6 +4,7 @@ import (
 	"context"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"necws/day3/dto"
 	"sync"
 )
 
@@ -31,4 +32,16 @@ func MongoDbHelper() (*mongo.Client, error) {
 	})
 
 	return clientInstance, clientInstanceError
+}
+
+func CreateBank(bankRequest dto.BankRequest) error {
+
+	client, _ := MongoDbHelper()
+	collection := client.Database(DB).Collection("banks")
+	_, error := collection.InsertOne(context.TODO(), bankRequest)
+	if error != nil {
+		return error
+	}
+	return nil
+
 }

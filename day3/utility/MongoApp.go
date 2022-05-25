@@ -1,15 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"necws/day3/dao"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"necws/day3/models"
 )
 
 func main() {
 
-	_, err := dao.MongoDbHelper()
-	if err == nil {
-		fmt.Println("Mongodb conn ready...")
+	var bank models.Bank = models.Bank{primitive.ObjectID{}, "HSBC000111",
+		"HSBC", "Mylapore",
 	}
-
+	bank.Create()
 }

@@ -20,6 +20,7 @@ type ICurrency interface {
 	Create()
 	Edit()
 	Delete()
+	View()
 }
 
 func (Curr *Currency) Create() (int64, error) {
@@ -37,5 +38,9 @@ func (Curr *Currency) Edit(value int32) *Currency {
 }
 
 func (Curr *Currency) Delete() {
+
+}
+
+func (Curr *Currency) View() {
 
 }

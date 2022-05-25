@@ -2,8 +2,10 @@ package dao
 
 import (
 	"database/sql"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
+	"necws/day3/dto"
 )
 
 func DBHelper() *sql.DB {
@@ -28,5 +30,25 @@ func CreateCurrency(Code string, Value int32, Symbol string) (int64, error) {
 		log.Fatal("Error occurred while saving...", err)
 	}
 	return result.RowsAffected()
+
+}
+
+func ViewCurrencies() {
+
+	db := DBHelper()
+	defer db.Close()
+	queryString := "Select * from Currency;"
+	var currencyResponse dto.CurrencyResponse
+	rows, err := db.Query(queryString)
+	if err != nil {
+		log.Fatal("Error occurred while saving...", err)
+	} else {
+		for rows.Next() {
+			rows.Scan(&currencyResponse.CurrencyCode,
+				&currencyResponse.CurrencyValue, &currencyResponse.CurrencySymbol)
+			fmt.Printf("%v\n", currencyResponse)
+		}
+
+	}
 
 }

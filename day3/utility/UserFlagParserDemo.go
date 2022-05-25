@@ -17,6 +17,6 @@ func init() {
 
 func main() {
 	flag.Parse()
-	fmt.Println(*userName)
-	fmt.Println(*password)
+	fmt.Println("UserName", *userName)
+	fmt.Println("Password", *password)
 }

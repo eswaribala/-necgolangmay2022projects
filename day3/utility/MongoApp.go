@@ -7,7 +7,8 @@ import (
 
 func main() {
 
-	var bank models.Bank = models.Bank{primitive.ObjectID{}, "HSBC000111",
+	var bank models.Bank = models.Bank{primitive.ObjectID{},
+		"HSBC000111",
 		"HSBC", "Mylapore",
 	}
 	bank.Create()

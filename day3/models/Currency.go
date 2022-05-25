@@ -23,7 +23,8 @@ type ICurrency interface {
 }
 
 func (Curr *Currency) Create() (int64, error) {
-	result, err := dao.CreateCurrency(Curr)
+	result, err := dao.CreateCurrency(Curr.CurrencyCode,
+		Curr.CurrencyValue, Curr.CurrencySymbol)
 	if err != nil {
 		return 0, err
 	}

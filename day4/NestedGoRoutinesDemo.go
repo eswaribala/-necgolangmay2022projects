@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -19,11 +20,13 @@ func main() {
 	for _, link := range links {
 		//child routine starts
 		//passing channel as parameter
-		go accessLinkV1(link, c)
+		go accessLinkV2(link, c)
 	}
-	for _ = range links {
-		//receiver
-		fmt.Println(<-c)
+	for l := range c {
+		go func(link string) {
+			time.Sleep(10000)
+			accessLinkV2(link, c)
+		}(l)
 	}
 	//fmt.Println(<-c)
 	//main routing executing
@@ -31,18 +34,19 @@ func main() {
 }
 
 //receiving channel parameter
-func accessLinkV1(link string, c chan string) {
+func accessLinkV2(link string, c chan string) {
 
 	_, err := http.Get(link)
 
 	if err != nil {
 		fmt.Println("Error Occurred", err)
 		//writing message in to channel
-		c <- "Error occurred"
+
+		c <- link
 	} else {
 		fmt.Println("Visiting", link)
 		//writing message in to channel
-		c <- "Link up"
+		c <- link
 	}
 
 }

@@ -18,7 +18,7 @@ func main() {
 		for _, value := range data {
 			fmt.Printf("%d\n", value)
 		}
-	*///sort the data
+	*/ //sort the data
 	sort.Ints(data)
 	//fmt.Println("After Sorting.....")
 	/*

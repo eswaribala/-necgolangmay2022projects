@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -15,6 +16,8 @@ func main() {
 
 	//anonymous function
 	go func(message string, dc chan string) {
+
+		time.Sleep(1000)
 		if strings.ContainsAny(message, "Delta") {
 			dc <- "Delta Ready"
 		} else {
@@ -26,18 +29,18 @@ func main() {
 	go ecoTrading("Compute ET", et)
 	go nonEcoTrading("Compute Leg1 and Leg2", net)
 
-	//channel receiver
+	//select channel receiver
 	func() {
-		for {
-			select {
-			case msg1 := <-et:
-				fmt.Println(msg1)
-			case msg2 := <-net:
-				fmt.Println(msg2)
-			case msg3 := <-dc:
-				fmt.Println(msg3)
-			}
+
+		select {
+		case msg1 := <-et:
+			fmt.Println(msg1)
+		case msg2 := <-net:
+			fmt.Println(msg2)
+		case msg3 := <-dc:
+			fmt.Println(msg3)
 		}
+
 	}()
 
 	var decision string
@@ -48,6 +51,7 @@ func main() {
 
 func ecoTrading(message string, et chan string) {
 
+	time.Sleep(2000)
 	if len(message) == 0 {
 		et <- "Message cannot be empty"
 	} else {
@@ -58,6 +62,7 @@ func ecoTrading(message string, et chan string) {
 
 func nonEcoTrading(message string, net chan string) {
 
+	time.Sleep(3000)
 	if strings.HasPrefix(message, "Leg1") {
 		net <- "Non Economic Trading Done..."
 	} else {

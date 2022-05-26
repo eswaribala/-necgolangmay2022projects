@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"io"
 	"log"
 	"net"
 	"time"
@@ -23,5 +23,12 @@ func main() {
 }
 
 func handleConn(conn net.Conn) {
-	fmt.Println(time.Now())
+	defer conn.Close()
+	for {
+		_, err := io.WriteString(conn, time.Now().Format("15:04:05\n"))
+		if err != nil {
+			return // e.g., client disconnected
+		}
+		time.Sleep(1 * time.Second)
+	}
 }

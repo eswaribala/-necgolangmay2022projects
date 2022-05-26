@@ -6,7 +6,9 @@ import (
 )
 
 var wg1 sync.WaitGroup
-var mutex sync.Mutex
+
+//mutex taken from another file
+//var mutex sync.Mutex
 var accountBalance int = 5000
 
 func main() {

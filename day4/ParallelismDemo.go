@@ -2,30 +2,43 @@ package main
 
 import (
 	"fmt"
+	"runtime"
+	"strconv"
 	"sync"
 )
 
 var wg2 sync.WaitGroup
 
 func listenMusic(wg *sync.WaitGroup) {
+	defer wg.Done()
+	for i := 0; i < 10; i++ {
+		fmt.Println("Listening Music...." + strconv.Itoa(i))
+	}
 
-	fmt.Println("Listening Music....")
-	wg.Done()
 }
 
 func ridingCar(wg *sync.WaitGroup) {
-	fmt.Println("Riding Car....")
-	wg.Done()
+	defer wg.Done()
+	for i := 0; i < 10; i++ {
+		fmt.Println("Riding Car...." + strconv.Itoa(i))
+	}
+
 }
 
 func watchingMovie(wg *sync.WaitGroup) {
-	fmt.Println("Watching TV....")
-	wg.Done()
+	defer wg.Done()
+	for i := 0; i < 10; i++ {
+		fmt.Println("Watching TV...." + strconv.Itoa(i))
+	}
+
 }
 
 func eatingPopCorn(wg *sync.WaitGroup) {
-	fmt.Println("Eating Popcorn....")
-	wg.Done()
+	defer wg.Done()
+	for i := 0; i < 10; i++ {
+		fmt.Println("Eating pop corn...." + strconv.Itoa(i))
+	}
+
 }
 
 var listOfTasks = []func(wg *sync.WaitGroup){
@@ -33,13 +46,13 @@ var listOfTasks = []func(wg *sync.WaitGroup){
 }
 
 func main() {
-
+	runtime.GOMAXPROCS(7)
 	fmt.Println(len(listOfTasks))
 	wg2.Add(len(listOfTasks))
 	for _, task := range listOfTasks {
 
 		go task(&wg2)
 	}
-	fmt.Println("All the tasks done")
+
 	wg2.Wait()
 }

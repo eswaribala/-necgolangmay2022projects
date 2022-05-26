@@ -26,6 +26,20 @@ func main() {
 	go ecoTrading("Compute ET", et)
 	go nonEcoTrading("Compute Leg1 and Leg2", net)
 
+	//channel receiver
+	func() {
+		for {
+			select {
+			case msg1 := <-et:
+				fmt.Println(msg1)
+			case msg2 := <-net:
+				fmt.Println(msg2)
+			case msg3 := <-dc:
+				fmt.Println(msg3)
+			}
+		}
+	}()
+
 	var decision string
 	fmt.Println("Do you want to close Trading")
 	fmt.Scanln(&decision)

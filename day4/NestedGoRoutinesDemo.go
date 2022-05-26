@@ -23,9 +23,10 @@ func main() {
 		go accessLinkV2(link, c)
 	}
 	for l := range c {
+		fmt.Println(l)
 		go func(link string) {
 			time.Sleep(10000)
-			accessLinkV2(link, c)
+			go accessLinkV2(link, c)
 		}(l)
 	}
 	//fmt.Println(<-c)

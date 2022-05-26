@@ -9,7 +9,7 @@ import (
 
 func main() {
 	listen, err := net.Listen("tcp",
-		"localhost:8000")
+		"localhost:4000")
 	for {
 		if err != nil {
 			log.Println("Net TCP Server not running")
@@ -28,7 +28,7 @@ func main() {
 func handleConn(conn net.Conn) {
 	defer conn.Close()
 	for {
-		_, err := io.WriteString(conn, time.Now().Format("14:20:20"))
+		_, err := io.WriteString(conn, time.Now().Format("15:04:05\t"))
 		if err != nil {
 			return // e.g., client disconnected
 		}

@@ -5,6 +5,7 @@ import (
 	"runtime"
 	"strconv"
 	"sync"
+	"time"
 )
 
 var wg2 sync.WaitGroup
@@ -46,13 +47,18 @@ var listOfTasks = []func(wg *sync.WaitGroup){
 }
 
 func main() {
+
 	runtime.GOMAXPROCS(7)
-	fmt.Println(len(listOfTasks))
+	fmt.Printf("No of Cores %d\n", runtime.NumCPU())
+	fmt.Println(len(listOfTasks) + 1)
+	t1 := time.Now()
 	wg2.Add(len(listOfTasks))
 	for _, task := range listOfTasks {
 
 		go task(&wg2)
 	}
-
+	t2 := time.Now()
+	fmt.Println(t2.Sub(t1))
 	wg2.Wait()
+
 }

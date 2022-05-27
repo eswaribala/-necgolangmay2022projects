@@ -3,6 +3,7 @@ package dao
 import (
 	"database/sql"
 	"fmt"
+	//blank import -> init()
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"necws/day3/dto"

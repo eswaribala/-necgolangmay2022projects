@@ -15,7 +15,7 @@ var db *gorm.DB
 
 func InitDB() {
 	var err error
-	dataSourceName := "root:vignesh@tcp(localhost:3306)/?parseTime=True"
+	dataSourceName := "root:vignesh@tcp(mysql:3306)/?parseTime=True"
 	db, err = gorm.Open("mysql", dataSourceName)
 
 	if err != nil {

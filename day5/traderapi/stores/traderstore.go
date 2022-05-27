@@ -15,7 +15,7 @@ var db *gorm.DB
 
 func InitDB() {
 	var err error
-	dataSourceName := "root:vignesh@tcp(mysql:3306)/?parseTime=True"
+	dataSourceName := "root:vignesh@tcp(localhost:3306)/?parseTime=True"
 	db, err = gorm.Open("mysql", dataSourceName)
 
 	if err != nil {
@@ -25,7 +25,7 @@ func InitDB() {
 
 	// Create the database. This is a one-time step.
 	// Comment out if running multiple times - You may see an error otherwise
-	db.Exec("CREATE DATABASE nec_trader_db")
+	//db.Exec("CREATE DATABASE nec_trader_db")
 	db.Exec("USE nec_trader_db")
 
 	// Migration to create tables for Trader and Item schema

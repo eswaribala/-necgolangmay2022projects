@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gorilla/mux"
 	_ "github.com/necws/day5/traderapi/docs"
 	"github.com/necws/day5/traderapi/stores"
@@ -41,4 +42,26 @@ func main() {
 	// Swagger
 	router.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 	log.Fatal(http.ListenAndServe(":7070", router))
+}
+
+func newRouter() *mux.Router {
+	router := mux.NewRouter()
+	router.HandleFunc("/home", handler).Methods("GET")
+	// Create
+	router.HandleFunc("/traders", stores.CreateTrader).Methods("POST")
+	// Read
+	router.HandleFunc("/traders/{traderId}", stores.GetTrader).Methods("GET")
+	// Read-all
+	router.HandleFunc("/traders", stores.GetTraders).Methods("GET")
+	// Update
+	router.HandleFunc("/traders/{traderId}", stores.UpdateTrader).Methods("PUT")
+	// Delete
+	router.HandleFunc("/traders/{traderId}", stores.DeleteTrader).Methods("DELETE")
+	// Initialize db connection
+	stores.InitDB()
+	return router
+}
+func handler(w http.ResponseWriter, r *http.Request) {
+	// For this case, we will always pipe "Rocking with Go" into the response writer
+	fmt.Fprintf(w, "Rocking with Go!")
 }

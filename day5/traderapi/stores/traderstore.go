@@ -50,16 +50,30 @@ func CreateTrader(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(trader)
 }
 
+// GetTraders godoc
+// @Summary Get details of all traders
+// @Description Get details of all traders
+// @Tags traders
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.Trader
+// @Router /traders [get]
+func GetTraders(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var traders []models.Trader
+	db.Find(&traders)
+	json.NewEncoder(w).Encode(traders)
+}
+
 // GetTrader godoc
 // @Summary Get details for a given traderId
 // @Description Get details of order corresponding to the input traderId
-// @Tags Traders
+// @Tags traders
 // @Accept  json
 // @Produce  json
 // @Param traderId path int true "ID of the trader"
 // @Success 200 {object} models.Trader
 // @Router /traders/{traderId} [get]
-
 func GetTrader(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
@@ -68,22 +82,6 @@ func GetTrader(w http.ResponseWriter, r *http.Request) {
 	var trader models.Trader
 	db.First(&trader, inputTraderID)
 	json.NewEncoder(w).Encode(trader)
-}
-
-// GetTrader godoc
-// @Summary Get details of all traders
-// @Description Get details of all traders
-// @Tags traders
-// @Accept  json
-// @Produce  json
-// @Success 200 {array} models.Trader
-// @Router /traders [get]
-
-func GetTraders(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	var traders []models.Trader
-	db.Find(&traders)
-	json.NewEncoder(w).Encode(traders)
 }
 
 // UpdateTrader godoc
@@ -95,7 +93,6 @@ func GetTraders(w http.ResponseWriter, r *http.Request) {
 // @Param traderId path int true "ID of the trader to be updated"
 // @Success 200 {object} models.Trader
 // @Router /traders/{traderId} [post]
-
 func UpdateTrader(w http.ResponseWriter, r *http.Request) {
 	var updatedTrader models.Trader
 	json.NewDecoder(r.Body).Decode(&updatedTrader)
@@ -114,7 +111,6 @@ func UpdateTrader(w http.ResponseWriter, r *http.Request) {
 // @Param traderId path int true "ID of the trader to be deleted"
 // @Success 204 "No Content"
 // @Router /traders/{traderId} [delete]
-
 func DeleteTrader(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	inputTraderID := params["traderId"]

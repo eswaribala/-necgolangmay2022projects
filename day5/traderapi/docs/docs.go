@@ -33,6 +33,30 @@ var doc = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/traders": {
+            "get": {
+                "description": "Get details of all traders",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "traders"
+                ],
+                "summary": "Get details of all traders",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Trader"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "Create a new trader with the input paylod",
                 "consumes": [
@@ -62,6 +86,95 @@ var doc = `{
                         "schema": {
                             "$ref": "#/definitions/models.Trader"
                         }
+                    }
+                }
+            }
+        },
+        "/traders/{traderId}": {
+            "get": {
+                "description": "Get details of order corresponding to the input traderId",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "traders"
+                ],
+                "summary": "Get details for a given traderId",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID of the trader",
+                        "name": "traderId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Trader"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Update the trader corresponding to the input traderId",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "traders"
+                ],
+                "summary": "Update trader identified by the given traderId",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID of the trader to be updated",
+                        "name": "traderId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Trader"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete the trader corresponding to the input traderId",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "traders"
+                ],
+                "summary": "Delete trader identified by the given traderId",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID of the trader to be deleted",
+                        "name": "traderId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
                     }
                 }
             }

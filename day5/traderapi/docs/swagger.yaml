@@ -23,6 +23,22 @@ info:
   version: "1.0"
 paths:
   /traders:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all traders
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Trader'
+            type: array
+      summary: Get details of all traders
+      tags:
+      - traders
     post:
       consumes:
       - application/json
@@ -42,6 +58,65 @@ paths:
           schema:
             $ref: '#/definitions/models.Trader'
       summary: Create a new trader
+      tags:
+      - traders
+  /traders/{traderId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the trader corresponding to the input traderId
+      parameters:
+      - description: ID of the trader to be deleted
+        in: path
+        name: traderId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+      summary: Delete trader identified by the given traderId
+      tags:
+      - traders
+    get:
+      consumes:
+      - application/json
+      description: Get details of order corresponding to the input traderId
+      parameters:
+      - description: ID of the trader
+        in: path
+        name: traderId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Trader'
+      summary: Get details for a given traderId
+      tags:
+      - traders
+    post:
+      consumes:
+      - application/json
+      description: Update the trader corresponding to the input traderId
+      parameters:
+      - description: ID of the trader to be updated
+        in: path
+        name: traderId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Trader'
+      summary: Update trader identified by the given traderId
       tags:
       - traders
 swagger: "2.0"

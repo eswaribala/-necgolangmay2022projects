@@ -1,4 +1,47 @@
+basePath: /
+definitions:
+  models.Trader:
+    properties:
+      doj:
+        type: string
+      traderId:
+        type: integer
+      traderName:
+        type: string
+    type: object
+host: localhost:7070
 info:
-  contact: {}
-paths: {}
+  contact:
+    email: param@swagger.io
+    name: API Support
+  description: This is a sample service for managing Traders
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Traders API
+  version: "1.0"
+paths:
+  /traders:
+    post:
+      consumes:
+      - application/json
+      description: Create a new trader with the input paylod
+      parameters:
+      - description: Create trader
+        in: body
+        name: trader
+        required: true
+        schema:
+          $ref: '#/definitions/models.Trader'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Trader'
+      summary: Create a new trader
+      tags:
+      - traders
 swagger: "2.0"

@@ -7,5 +7,6 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gorilla/mux v1.8.0
 	github.com/jinzhu/gorm v1.9.16
+	github.com/swaggo/http-swagger v1.2.8
 	github.com/swaggo/swag v1.8.2
 )
